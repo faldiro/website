@@ -9,8 +9,8 @@ file exists), so the site upgrades automatically the moment a file lands here
 
 | File to add | Used for |
 |---|---|
-| `assets/microsoft-logo.svg` | The Microsoft logo (four squares + wordmark), shown in the hero badge and the Microsoft partner card |
-| `assets/csp-badge.svg` | Your "Cloud Solution Provider" partner badge/seal |
+| `assets/logo.svg` | IT 360 SOLUTIONS' own logo, shown in the header next to the wordmark |
+| `assets/csp-badge.svg` | Your "Cloud Solution Provider" partner badge/seal, shown in the hero badge |
 | `assets/icons/word.svg` | Word app icon |
 | `assets/icons/excel.svg` | Excel app icon |
 | `assets/icons/powerpoint.svg` | PowerPoint app icon |
