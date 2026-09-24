@@ -61,12 +61,14 @@
   .nav-links a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.75); text-decoration: none; transition: color 0.2s; }
   .nav-links a:hover { color: white; }
   .nav-cta {
-    background: linear-gradient(135deg, var(--blue-400), var(--accent)) !important;
-    color: white !important; padding: 9px 22px !important; border-radius: 8px !important;
-    font-weight: 600 !important; box-shadow: 0 4px 16px rgba(37,99,235,0.35) !important;
-    transition: opacity 0.2s, transform 0.2s !important;
+    background: var(--blue-400) !important;
+    color: white !important; padding: 9px 20px !important; border-radius: 7px !important;
+    font-weight: 600 !important; border: 1px solid transparent !important;
+    transition: background-color 0.15s ease, transform 0.08s ease !important;
   }
-  .nav-cta:hover { opacity: 0.9 !important; transform: translateY(-1px) !important; }
+  .nav-cta:hover { background: var(--blue-300) !important; }
+  .nav-cta:active { transform: scale(0.96) !important; }
+  .nav-cta:focus-visible { outline: 2px solid var(--accent) !important; outline-offset: 2px !important; }
   .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; border: none; background: none; }
   .hamburger span { width: 24px; height: 2px; background: white; border-radius: 2px; }
 
@@ -94,7 +96,7 @@
     border-radius: 50%; z-index: 0; animation: pulse-glow 5s ease-in-out infinite;
   }
   @keyframes pulse-glow { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.12);opacity:0.65} }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  @keyframes pulse-dot { 0%,100%{opacity:1} 50%{opacity:0.45} }
   @keyframes fadeUp { from{opacity:0;transform:translateY(26px)} to{opacity:1;transform:translateY(0)} }
 
   .hero-inner {
@@ -109,7 +111,7 @@
     font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 22px;
     animation: fadeUp 0.6s ease both;
   }
-  .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent); animation:blink 1.5s infinite; }
+  .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--accent); }
   .hero-badge img.badge-logo { height: 14px; width: auto; }
   .hero-title {
     font-family: var(--font-display); font-size: clamp(2.2rem, 4vw, 3.5rem);
@@ -125,21 +127,29 @@
   .hero-buttons { display: flex; flex-wrap: wrap; gap: 14px; animation: fadeUp 0.6s 0.3s ease both; }
 
   .btn-primary {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: linear-gradient(135deg, var(--blue-400), var(--accent));
-    color: white; padding: 14px 28px; border-radius: 10px;
+    display: inline-flex; align-items: center; gap: 9px;
+    background: var(--blue-400); color: white; padding: 14px 26px; border-radius: 9px;
     font-family: var(--font-body); font-size: 15px; font-weight: 600;
-    text-decoration: none; transition: all 0.25s; box-shadow: 0 8px 24px rgba(37,99,235,0.4); border: none; cursor: pointer;
+    text-decoration: none; border: 1px solid transparent; cursor: pointer;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
   }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(37,99,235,0.52); }
+  .btn-primary svg { transition: transform 0.2s ease; }
+  .btn-primary:hover { background: var(--blue-300); box-shadow: 0 6px 18px rgba(37,99,235,0.35); }
+  .btn-primary:hover svg { transform: translateX(2px); }
+  .btn-primary:active { transform: scale(0.98); box-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+  .btn-primary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .btn-outline {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 1.5px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.05);
-    color: white; padding: 13px 26px; border-radius: 10px;
+    display: inline-flex; align-items: center; gap: 9px;
+    border: 1px solid rgba(255,255,255,0.22); background: transparent;
+    color: white; padding: 13px 25px; border-radius: 9px;
     font-family: var(--font-body); font-size: 15px; font-weight: 500;
-    text-decoration: none; transition: all 0.25s; cursor: pointer; backdrop-filter: blur(8px);
+    text-decoration: none; cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.08s ease;
   }
-  .btn-outline:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.45); transform: translateY(-2px); }
+  .btn-outline:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.4); }
+  .btn-outline:active { transform: scale(0.98); }
+  .btn-outline:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
   .hero-stats { display: flex; gap: 36px; margin-top: 50px; animation: fadeUp 0.6s 0.4s ease both; }
   .hero-stat-num { font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: white; line-height: 1; }
@@ -169,7 +179,7 @@
     transition: background 0.2s;
   }
   .hc-item:hover { background: rgba(255,255,255,0.08); }
-  .hc-ico { font-size:16px; width:28px; text-align:center; }
+  .hc-ico { width:26px; height:26px; flex-shrink:0; display:flex; align-items:center; justify-content:center; color:var(--accent); }
   .hc-name { font-size:12px; color:rgba(255,255,255,0.8); font-weight:500; }
   .hc-footer {
     margin-top:20px; padding-top:16px; border-top:1px solid rgba(255,255,255,0.07);
@@ -177,7 +187,7 @@
   }
   .hc-status-label { font-size:12px; color:rgba(255,255,255,0.45); }
   .hc-status-ok { display:flex; align-items:center; gap:6px; font-size:12px; color:#4ade80; font-weight:500; }
-  .hc-status-dot { width:7px; height:7px; border-radius:50%; background:#4ade80; animation:blink 1.8s infinite; }
+  .hc-status-dot { width:7px; height:7px; border-radius:50%; background:#4ade80; animation:pulse-dot 2.2s ease-in-out infinite; }
 
   /* SECTIONS */
   section { padding: 100px 5%; }
@@ -223,16 +233,16 @@
   .service-card:hover { box-shadow:var(--shadow-lg); transform:translateY(-4px); border-color:var(--blue-200); }
   .service-card:hover::before { transform:scaleX(1); }
   .svc-icon {
-    width:50px; height:50px; border-radius:12px; margin-bottom:18px;
-    display:flex; align-items:center; justify-content:center; font-size:22px;
+    width:50px; height:50px; border-radius:12px; margin-bottom:18px; color:var(--blue-500);
+    display:flex; align-items:center; justify-content:center;
     background:linear-gradient(135deg,var(--blue-100),rgba(37,99,235,0.07));
-    border:1px solid var(--blue-100); transition:background 0.3s, transform 0.3s;
+    border:1px solid var(--blue-100); transition:background 0.25s ease, color 0.25s ease, transform 0.2s ease;
   }
-  .service-card:hover .svc-icon { background:linear-gradient(135deg,var(--blue-400),var(--accent)); transform:scale(1.06); }
+  .service-card:hover .svc-icon { background:linear-gradient(135deg,var(--blue-400),var(--accent)); color:white; transform:scale(1.06); }
   .svc-name { font-family:var(--font-display); font-size:16px; font-weight:700; color:var(--gray-900); margin-bottom:9px; }
   .svc-desc { font-size:14px; color:var(--gray-500); line-height:1.65; }
-  .svc-arrow { display:inline-flex; align-items:center; gap:5px; margin-top:16px; font-size:13px; font-weight:600; color:var(--blue-400); opacity:0; transition:opacity 0.2s; }
-  .service-card:hover .svc-arrow { opacity:1; }
+  .svc-arrow { display:inline-flex; align-items:center; gap:5px; margin-top:16px; font-size:13px; font-weight:600; color:var(--blue-400); opacity:0; transform:translateX(-4px); transition:opacity 0.2s ease, transform 0.2s ease; }
+  .service-card:hover .svc-arrow { opacity:1; transform:translateX(0); }
 
   /* WHY */
   #why { background:var(--blue-900); }
@@ -246,7 +256,7 @@
     border-radius:var(--radius); padding:30px; transition:background 0.3s, transform 0.3s; position:relative; overflow:hidden;
   }
   .why-card:hover { background:rgba(255,255,255,0.08); transform:translateY(-4px); }
-  .why-icon { width:46px; height:46px; border-radius:11px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; font-size:20px; background:rgba(37,99,235,0.2); border:1px solid rgba(37,99,235,0.3); }
+  .why-icon { width:46px; height:46px; border-radius:11px; margin-bottom:18px; display:flex; align-items:center; justify-content:center; color:var(--accent); background:rgba(37,99,235,0.2); border:1px solid rgba(37,99,235,0.3); }
   .why-title { font-family:var(--font-display); font-size:17px; font-weight:700; color:white; margin-bottom:9px; }
   .why-desc { font-size:14px; color:rgba(255,255,255,0.54); line-height:1.65; }
 
@@ -272,7 +282,7 @@
     background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1);
     border-radius:10px; padding:13px 15px; display:flex; align-items:center; gap:10px;
   }
-  .ms-product-icon { font-size:17px; }
+  .ms-product-icon { display:flex; align-items:center; color:white; opacity:0.92; }
   .ms-product-name { font-size:13px; font-weight:600; color:white; }
   .ms-product-type { font-size:11px; color:rgba(255,255,255,0.48); }
   .ms-list { list-style:none; display:flex; flex-direction:column; gap:13px; margin:20px 0 28px; }
@@ -284,19 +294,24 @@
   }
   .ms-cta-row { display:flex; gap:12px; flex-wrap:wrap; }
   .btn-blue {
-    display:inline-flex; align-items:center; gap:8px;
-    background:linear-gradient(135deg,var(--blue-400),var(--accent)); color:white; padding:12px 24px; border-radius:10px;
+    display:inline-flex; align-items:center; gap:9px;
+    background:var(--blue-500); color:white; padding:12px 22px; border-radius:9px;
     font-family:var(--font-body); font-size:14px; font-weight:600; text-decoration:none;
-    transition:all 0.25s; box-shadow:0 4px 16px rgba(37,99,235,0.35); border:none; cursor:pointer;
+    border:1px solid transparent; cursor:pointer; box-shadow:0 1px 2px rgba(0,0,0,0.12);
+    transition:background-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
   }
-  .btn-blue:hover { transform:translateY(-2px); box-shadow:0 10px 28px rgba(37,99,235,0.46); }
+  .btn-blue:hover { background:var(--blue-400); box-shadow:0 6px 18px rgba(37,99,235,0.3); }
+  .btn-blue:active { transform:scale(0.98); }
+  .btn-blue:focus-visible { outline:2px solid var(--blue-400); outline-offset:2px; }
   .btn-ghost {
-    display:inline-flex; align-items:center; gap:8px;
-    border:1.5px solid var(--gray-200); background:white; color:var(--gray-700); padding:11px 22px; border-radius:10px;
+    display:inline-flex; align-items:center; gap:9px;
+    border:1px solid var(--gray-300); background:white; color:var(--gray-700); padding:11px 21px; border-radius:9px;
     font-family:var(--font-body); font-size:14px; font-weight:500; text-decoration:none;
-    transition:all 0.25s; cursor:pointer;
+    cursor:pointer; transition:border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease, transform 0.08s ease;
   }
-  .btn-ghost:hover { border-color:var(--blue-400); color:var(--blue-400); transform:translateY(-2px); }
+  .btn-ghost:hover { border-color:var(--blue-400); color:var(--blue-500); background:var(--gray-50); }
+  .btn-ghost:active { transform:scale(0.98); }
+  .btn-ghost:focus-visible { outline:2px solid var(--blue-400); outline-offset:2px; }
 
   /* PROCESS */
   #process { background:white; }
@@ -312,9 +327,9 @@
     font-family:var(--font-display); font-size:21px; font-weight:800;
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 0 0 6px white, 0 0 0 8px var(--blue-100), 0 8px 24px rgba(37,99,235,0.3);
-    transition:transform 0.3s;
+    transition:transform 0.2s ease;
   }
-  .process-step:hover .ps-num { transform:scale(1.1); }
+  .process-step:hover .ps-num { transform:scale(1.05); }
   .ps-name { font-family:var(--font-display); font-size:18px; font-weight:700; color:var(--gray-900); margin-bottom:9px; }
   .ps-desc { font-size:14px; color:var(--gray-500); line-height:1.62; }
 
@@ -347,19 +362,22 @@
   .contact-info-items { display:flex; flex-direction:column; gap:18px; margin-top:32px; }
   .ci-item { display:flex; align-items:flex-start; gap:14px; }
   .ci-icon {
-    width:43px; height:43px; border-radius:10px; flex-shrink:0;
+    width:43px; height:43px; border-radius:10px; flex-shrink:0; color:var(--accent);
     background:rgba(37,99,235,0.2); border:1px solid rgba(37,99,235,0.3);
-    display:flex; align-items:center; justify-content:center; font-size:17px;
+    display:flex; align-items:center; justify-content:center;
   }
   .ci-label { font-size:12px; color:rgba(255,255,255,0.48); text-transform:uppercase; letter-spacing:0.5px; }
   .ci-value { font-size:15px; color:white; font-weight:500; margin-top:2px; }
   .whatsapp-btn {
     display:inline-flex; align-items:center; gap:10px; margin-top:30px;
-    background:#25d366; color:white; padding:12px 22px; border-radius:10px;
-    font-size:15px; font-weight:600; text-decoration:none; transition:all 0.25s;
-    box-shadow:0 4px 16px rgba(37,211,102,0.35);
+    background:#25d366; color:white; padding:12px 22px; border-radius:9px;
+    font-size:15px; font-weight:600; text-decoration:none; border:1px solid transparent; cursor:pointer;
+    box-shadow:0 1px 2px rgba(0,0,0,0.15);
+    transition:background-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
   }
-  .whatsapp-btn:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(37,211,102,0.52); }
+  .whatsapp-btn:hover { background:#20bd5a; box-shadow:0 6px 18px rgba(37,211,102,0.35); }
+  .whatsapp-btn:active { transform:scale(0.98); }
+  .whatsapp-btn:focus-visible { outline:2px solid #25d366; outline-offset:2px; }
   .contact-form {
     background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.1);
     border-radius:var(--radius-lg); padding:38px; backdrop-filter:blur(20px);
@@ -377,13 +395,16 @@
   .form-group input:focus, .form-group textarea:focus { border-color:var(--blue-400); background:rgba(255,255,255,0.1); }
   .form-group textarea { resize:vertical; min-height:108px; }
   .form-submit {
-    width:100%; padding:14px; border:none; border-radius:10px; cursor:pointer;
-    background:linear-gradient(135deg,var(--blue-400),var(--accent)); color:white;
+    width:100%; padding:14px; border:1px solid transparent; border-radius:9px; cursor:pointer;
+    background:var(--blue-400); color:white;
     font-family:var(--font-display); font-size:16px; font-weight:700; letter-spacing:0.2px;
-    transition:all 0.25s; box-shadow:0 4px 20px rgba(37,99,235,0.4);
+    box-shadow:0 1px 2px rgba(0,0,0,0.2);
+    transition:background-color 0.15s ease, box-shadow 0.15s ease, transform 0.08s ease;
     display:flex; align-items:center; justify-content:center; gap:8px;
   }
-  .form-submit:hover { transform:translateY(-2px); box-shadow:0 10px 32px rgba(37,99,235,0.55); }
+  .form-submit:hover { background:var(--blue-300); box-shadow:0 6px 20px rgba(37,99,235,0.3); }
+  .form-submit:active { transform:scale(0.99); }
+  .form-submit:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
 
   /* FOOTER */
   footer { background:#060f1d; padding:34px 5%; border-top:1px solid rgba(255,255,255,0.06); }
@@ -509,12 +530,12 @@
           <div class="hc-title">IT 360 Solutions — Tableau de bord</div>
         </div>
         <div class="hc-grid">
-          <div class="hc-item"><div class="hc-ico">☁️</div><div class="hc-name">Azure Cloud</div></div>
-          <div class="hc-item"><div class="hc-ico">🔐</div><div class="hc-name">Cybersécurité</div></div>
-          <div class="hc-item"><div class="hc-ico">🖥️</div><div class="hc-name">Matériel IT</div></div>
-          <div class="hc-item"><div class="hc-ico">📡</div><div class="hc-name">Réseau & WiFi</div></div>
-          <div class="hc-item"><div class="hc-ico">📋</div><div class="hc-name">Microsoft 365</div></div>
-          <div class="hc-item"><div class="hc-ico">📷</div><div class="hc-name">Surveillance</div></div>
+          <div class="hc-item"><div class="hc-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div class="hc-name">Azure Cloud</div></div>
+          <div class="hc-item"><div class="hc-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="hc-name">Cybersécurité</div></div>
+          <div class="hc-item"><div class="hc-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="hc-name">Matériel IT</div></div>
+          <div class="hc-item"><div class="hc-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14 0"/><path d="M8.5 16.05a6 6 0 0 1 7 0"/><path d="M2 8.82a16 16 0 0 1 20 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div><div class="hc-name">Réseau & WiFi</div></div>
+          <div class="hc-item"><div class="hc-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="hc-name">Microsoft 365</div></div>
+          <div class="hc-item"><div class="hc-ico"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="hc-name">Surveillance</div></div>
         </div>
         <div class="hc-footer">
           <div class="hc-status-label">Statut système</div>
@@ -531,24 +552,24 @@
     <p class="partners-label">Nos marques partenaires de confiance</p>
     <div class="partners-track-wrap">
       <div class="partners-track">
-        <div class="partner-pill">🪟 Microsoft</div>
-        <div class="partner-pill">🖨️ HP</div>
-        <div class="partner-pill">💻 Dell</div>
-        <div class="partner-pill">🖥️ Lenovo</div>
-        <div class="partner-pill">🌐 Cisco</div>
-        <div class="partner-pill">📶 Aruba</div>
-        <div class="partner-pill">🖨️ Epson</div>
-        <div class="partner-pill">🛡️ Fortinet</div>
-        <div class="partner-pill">📷 Hikvision</div>
-        <div class="partner-pill">🪟 Microsoft</div>
-        <div class="partner-pill">🖨️ HP</div>
-        <div class="partner-pill">💻 Dell</div>
-        <div class="partner-pill">🖥️ Lenovo</div>
-        <div class="partner-pill">🌐 Cisco</div>
-        <div class="partner-pill">📶 Aruba</div>
-        <div class="partner-pill">🖨️ Epson</div>
-        <div class="partner-pill">🛡️ Fortinet</div>
-        <div class="partner-pill">📷 Hikvision</div>
+        <div class="partner-pill">Microsoft</div>
+        <div class="partner-pill">HP</div>
+        <div class="partner-pill">Dell</div>
+        <div class="partner-pill">Lenovo</div>
+        <div class="partner-pill">Cisco</div>
+        <div class="partner-pill">Aruba</div>
+        <div class="partner-pill">Epson</div>
+        <div class="partner-pill">Fortinet</div>
+        <div class="partner-pill">Hikvision</div>
+        <div class="partner-pill">Microsoft</div>
+        <div class="partner-pill">HP</div>
+        <div class="partner-pill">Dell</div>
+        <div class="partner-pill">Lenovo</div>
+        <div class="partner-pill">Cisco</div>
+        <div class="partner-pill">Aruba</div>
+        <div class="partner-pill">Epson</div>
+        <div class="partner-pill">Fortinet</div>
+        <div class="partner-pill">Hikvision</div>
       </div>
     </div>
   </div>
@@ -563,16 +584,16 @@
       <p class="section-sub">De l'infrastructure matérielle au cloud, nous couvrons tous vos besoins informatiques avec expertise et réactivité.</p>
     </div>
     <div class="services-grid">
-      <div class="service-card reveal"><div class="svc-icon">🖥️</div><div class="svc-name">Vente de matériel informatique</div><div class="svc-desc">PC, serveurs, imprimantes, accessoires HP, Dell, Lenovo et Cisco. Configuration et livraison incluses pour les entreprises.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal reveal-d1"><div class="svc-icon">📋</div><div class="svc-name">Licences Microsoft 365 / CSP</div><div class="svc-desc">Revendeur certifié CSP Microsoft. Gérez vos abonnements Microsoft 365, Office et solutions cloud avec flexibilité.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal reveal-d2"><div class="svc-icon">🔧</div><div class="svc-name">Maintenance informatique</div><div class="svc-desc">Maintenance préventive et corrective de votre parc IT. Contrats de maintenance adaptés à la taille de votre entreprise.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal"><div class="svc-icon">🎧</div><div class="svc-name">Helpdesk & Support technique</div><div class="svc-desc">Support de proximité et à distance pour vos utilisateurs. Tickets traités rapidement par nos techniciens certifiés.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal reveal-d1"><div class="svc-icon">🌐</div><div class="svc-name">Réseau & Sécurité</div><div class="svc-desc">Installation et administration de réseaux LAN/WAN, WiFi Aruba, firewalls Fortinet. Protection optimale de votre SI.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal reveal-d2"><div class="svc-icon">🔄</div><div class="svc-name">Migration Microsoft 365</div><div class="svc-desc">Migration de votre messagerie et données vers Exchange Online et SharePoint, sans interruption d'activité.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal"><div class="svc-icon">☁️</div><div class="svc-name">Azure Cloud & Backup</div><div class="svc-desc">Hébergement cloud, sauvegarde automatisée et reprise d'activité avec Microsoft Azure. Vos données toujours protégées.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal reveal-d1"><div class="svc-icon">📷</div><div class="svc-name">Caméras de surveillance</div><div class="svc-desc">Installation CCTV IP Hikvision HD pour bureaux, entrepôts et commerces. Monitoring local et à distance sécurisé.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal reveal-d2"><div class="svc-icon">📞</div><div class="svc-name">Téléphonie IP</div><div class="svc-desc">Solutions VoIP et téléphonie IP pour réduire vos coûts. Intégration Microsoft Teams Phone et systèmes IPBX.</div><div class="svc-arrow">En savoir plus →</div></div>
-      <div class="service-card reveal"><div class="svc-icon">🔑</div><div class="svc-name">Contrôle d'accès & Pointage</div><div class="svc-desc">Systèmes biométriques, badges RFID et gestion du temps et des présences pour votre entreprise.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div><div class="svc-name">Vente de matériel informatique</div><div class="svc-desc">PC, serveurs, imprimantes, accessoires HP, Dell, Lenovo et Cisco. Configuration et livraison incluses pour les entreprises.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal reveal-d1"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div class="svc-name">Licences Microsoft 365 / CSP</div><div class="svc-desc">Revendeur certifié CSP Microsoft. Gérez vos abonnements Microsoft 365, Office et solutions cloud avec flexibilité.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal reveal-d2"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/></svg></div><div class="svc-name">Maintenance informatique</div><div class="svc-desc">Maintenance préventive et corrective de votre parc IT. Contrats de maintenance adaptés à la taille de votre entreprise.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div><div class="svc-name">Helpdesk & Support technique</div><div class="svc-desc">Support de proximité et à distance pour vos utilisateurs. Tickets traités rapidement par nos techniciens certifiés.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal reveal-d1"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14 0"/><path d="M8.5 16.05a6 6 0 0 1 7 0"/><path d="M2 8.82a16 16 0 0 1 20 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div><div class="svc-name">Réseau & Sécurité</div><div class="svc-desc">Installation et administration de réseaux LAN/WAN, WiFi Aruba, firewalls Fortinet. Protection optimale de votre SI.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal reveal-d2"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></div><div class="svc-name">Migration Microsoft 365</div><div class="svc-desc">Migration de votre messagerie et données vers Exchange Online et SharePoint, sans interruption d'activité.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div class="svc-name">Azure Cloud & Backup</div><div class="svc-desc">Hébergement cloud, sauvegarde automatisée et reprise d'activité avec Microsoft Azure. Vos données toujours protégées.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal reveal-d1"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></div><div class="svc-name">Caméras de surveillance</div><div class="svc-desc">Installation CCTV IP Hikvision HD pour bureaux, entrepôts et commerces. Monitoring local et à distance sécurisé.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal reveal-d2"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="svc-name">Téléphonie IP</div><div class="svc-desc">Solutions VoIP et téléphonie IP pour réduire vos coûts. Intégration Microsoft Teams Phone et systèmes IPBX.</div><div class="svc-arrow">En savoir plus →</div></div>
+      <div class="service-card reveal"><div class="svc-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div><div class="svc-name">Contrôle d'accès & Pointage</div><div class="svc-desc">Systèmes biométriques, badges RFID et gestion du temps et des présences pour votre entreprise.</div><div class="svc-arrow">En savoir plus →</div></div>
     </div>
   </div>
 </section>
@@ -586,12 +607,12 @@
       <p class="section-sub">Expertise technique, réactivité et proximité — le trio gagnant pour votre infrastructure IT.</p>
     </div>
     <div class="why-grid">
-      <div class="why-card reveal"><div class="why-icon">⚡</div><div class="why-title">Réactivité rapide</div><div class="why-desc">Intervention garantie sous 4h pour les urgences. Notre équipe mobilisée résout vos problèmes sans délai.</div></div>
-      <div class="why-card reveal reveal-d1"><div class="why-icon">🏆</div><div class="why-title">Expertise certifiée</div><div class="why-desc">Ingénieurs certifiés Microsoft, Cisco et Fortinet. Des compétences reconnues au service de vos projets.</div></div>
-      <div class="why-card reveal reveal-d2"><div class="why-icon">⚙️</div><div class="why-title">Solutions sur mesure</div><div class="why-desc">Chaque entreprise est unique. Nous concevons des solutions adaptées à votre secteur et vos ambitions.</div></div>
-      <div class="why-card reveal"><div class="why-icon">🤝</div><div class="why-title">Accompagnement complet</div><div class="why-desc">De l'audit à la formation de vos équipes, nous vous accompagnons à chaque étape digitale.</div></div>
-      <div class="why-card reveal reveal-d1"><div class="why-icon">🎯</div><div class="why-title">Support professionnel</div><div class="why-desc">Un interlocuteur dédié, un helpdesk réactif et un suivi personnalisé pour votre satisfaction.</div></div>
-      <div class="why-card reveal reveal-d2"><div class="why-icon">💎</div><div class="why-title">Prix compétitifs</div><div class="why-desc">Meilleur rapport qualité-prix du marché marocain. Transparence totale, sans frais cachés.</div></div>
+      <div class="why-card reveal"><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div><div class="why-title">Réactivité rapide</div><div class="why-desc">Intervention garantie sous 4h pour les urgences. Notre équipe mobilisée résout vos problèmes sans délai.</div></div>
+      <div class="why-card reveal reveal-d1"><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div><div class="why-title">Expertise certifiée</div><div class="why-desc">Ingénieurs certifiés Microsoft, Cisco et Fortinet. Des compétences reconnues au service de vos projets.</div></div>
+      <div class="why-card reveal reveal-d2"><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></div><div class="why-title">Solutions sur mesure</div><div class="why-desc">Chaque entreprise est unique. Nous concevons des solutions adaptées à votre secteur et vos ambitions.</div></div>
+      <div class="why-card reveal"><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div class="why-title">Accompagnement complet</div><div class="why-desc">De l'audit à la formation de vos équipes, nous vous accompagnons à chaque étape digitale.</div></div>
+      <div class="why-card reveal reveal-d1"><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><div class="why-title">Support professionnel</div><div class="why-desc">Un interlocuteur dédié, un helpdesk réactif et un suivi personnalisé pour votre satisfaction.</div></div>
+      <div class="why-card reveal reveal-d2"><div class="why-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41 11 3.83A2 2 0 0 0 9.59 3.17L3 3v6.59a2 2 0 0 0 .66 1.41l9.58 9.59a2 2 0 0 0 2.83 0l4.52-4.52a2 2 0 0 0 0-2.83z"/><line x1="7.5" y1="7.5" x2="7.51" y2="7.5"/></svg></div><div class="why-title">Prix compétitifs</div><div class="why-desc">Meilleur rapport qualité-prix du marché marocain. Transparence totale, sans frais cachés.</div></div>
     </div>
   </div>
 </section>
@@ -616,12 +637,12 @@
             </div>
           </div>
           <div class="ms-products">
-            <div class="ms-product"><div class="ms-product-icon">📬</div><div><div class="ms-product-name">Exchange Online</div><div class="ms-product-type">Messagerie cloud</div></div></div>
-            <div class="ms-product"><div class="ms-product-icon">👥</div><div><div class="ms-product-name">Microsoft Teams</div><div class="ms-product-type">Collaboration</div></div></div>
-            <div class="ms-product"><div class="ms-product-icon">☁️</div><div><div class="ms-product-name">Azure Cloud</div><div class="ms-product-type">Infrastructure cloud</div></div></div>
-            <div class="ms-product"><div class="ms-product-icon">📋</div><div><div class="ms-product-name">Microsoft 365</div><div class="ms-product-type">Suite productivité</div></div></div>
-            <div class="ms-product"><div class="ms-product-icon">🛡️</div><div><div class="ms-product-name">Defender Security</div><div class="ms-product-type">Cybersécurité</div></div></div>
-            <div class="ms-product"><div class="ms-product-icon">💾</div><div><div class="ms-product-name">Azure Backup</div><div class="ms-product-type">Sauvegarde cloud</div></div></div>
+            <div class="ms-product"><div class="ms-product-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ms-product-name">Exchange Online</div><div class="ms-product-type">Messagerie cloud</div></div></div>
+            <div class="ms-product"><div class="ms-product-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><div class="ms-product-name">Microsoft Teams</div><div class="ms-product-type">Collaboration</div></div></div>
+            <div class="ms-product"><div class="ms-product-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div><div><div class="ms-product-name">Azure Cloud</div><div class="ms-product-type">Infrastructure cloud</div></div></div>
+            <div class="ms-product"><div class="ms-product-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div><div><div class="ms-product-name">Microsoft 365</div><div class="ms-product-type">Suite productivité</div></div></div>
+            <div class="ms-product"><div class="ms-product-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div><div class="ms-product-name">Defender Security</div><div class="ms-product-type">Cybersécurité</div></div></div>
+            <div class="ms-product"><div class="ms-product-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div><div><div class="ms-product-name">Azure Backup</div><div class="ms-product-type">Sauvegarde cloud</div></div></div>
           </div>
         </div>
       </div>
@@ -718,10 +739,10 @@
     <div class="contact-inner">
       <div class="reveal">
         <div class="contact-info-items">
-          <div class="ci-item"><div class="ci-icon">📍</div><div><div class="ci-label">Adresse</div><div class="ci-value">Casablanca, Paris</div></div></div>
-          <div class="ci-item"><div class="ci-icon">📧</div><div><div class="ci-label">Email</div><div class="ci-value">contact@it360.ma</div></div></div>
-          <div class="ci-item"><div class="ci-icon">📞</div><div><div class="ci-label">Téléphone</div><div class="ci-value">+212 520 123 923</div></div></div>
-          <div class="ci-item"><div class="ci-icon">⏰</div><div><div class="ci-label">Horaires</div><div class="ci-value">Lun – Ven : 8h30 – 18h30</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div><div class="ci-label">Adresse</div><div class="ci-value">Casablanca, Paris</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div><div><div class="ci-label">Email</div><div class="ci-value">contact@it360.ma</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div><div class="ci-label">Téléphone</div><div class="ci-value">+212 520 123 923</div></div></div>
+          <div class="ci-item"><div class="ci-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div><div class="ci-label">Horaires</div><div class="ci-value">Lun – Ven : 8h30 – 18h30</div></div></div>
         </div>
         <a href="https://wa.me/212661472967" class="whatsapp-btn" target="_blank">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -790,8 +811,8 @@
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.innerHTML = '✓ Message envoyé avec succès !';
-    btn.style.background = 'linear-gradient(135deg, #059669, #10b981)';
-    btn.style.boxShadow = '0 4px 20px rgba(5,150,105,0.4)';
+    btn.style.background = '#059669';
+    btn.style.boxShadow = '0 1px 2px rgba(0,0,0,0.2)';
     setTimeout(() => {
       btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Envoyer la demande';
       btn.style.background = '';
