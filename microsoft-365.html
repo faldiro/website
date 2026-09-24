@@ -76,6 +76,7 @@
     color:var(--ms-blue-dark); padding:7px 16px; border-radius:100px; font-size:13px; font-weight:700; margin-bottom:22px; box-shadow:var(--shadow);
   }
   .hero-badge::before { content:''; width:8px; height:8px; border-radius:2px; background:var(--ms-blue); }
+  .hero-badge img.badge-logo { height: 16px; width: auto; }
   .hero-title { font-size: clamp(2.1rem, 3.8vw, 3.2rem); font-weight: 700; line-height: 1.14; color: var(--n-900); margin-bottom: 20px; letter-spacing: -0.5px; }
   .hero-title .blue { color: var(--ms-blue); }
   .hero-sub { font-size: 17px; color: var(--n-700); max-width: 500px; line-height: 1.7; margin-bottom: 30px; }
@@ -102,8 +103,9 @@
   .app-tile:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
   .app-icon {
     width: 44px; height: 44px; border-radius: 8px; margin: 0 auto 10px; display: flex; align-items: center;
-    justify-content: center; font-weight: 800; font-size: 17px; color: white;
+    justify-content: center; font-weight: 800; font-size: 17px; color: white; position: relative;
   }
+  .app-icon img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; padding: 7px; }
   .app-name { font-size: 12px; font-weight: 600; color: var(--n-700); }
 
   /* SECTIONS */
@@ -293,7 +295,7 @@
 <section id="hero">
   <div class="hero-inner">
     <div class="reveal">
-      <div class="hero-badge">Partenaire Microsoft agréé</div>
+      <div class="hero-badge"><img class="badge-logo" src="assets/csp-badge.svg" alt="" onerror="this.remove()">Cloud Solution Provider Microsoft (CSP)</div>
       <h1 class="hero-title">Microsoft 365, Windows et Office <span class="blue">pour votre entreprise</span></h1>
       <p class="hero-sub">IT 360 SOLUTIONS vous accompagne dans le choix, l'acquisition et le déploiement de vos licences Microsoft : conseil personnalisé, migration et support inclus.</p>
       <div class="hero-buttons">
@@ -304,12 +306,12 @@
     </div>
     <div class="reveal">
       <div class="app-grid">
-        <div class="app-tile"><div class="app-icon" style="background:#D83B01;">W</div><div class="app-name">Word</div></div>
-        <div class="app-tile"><div class="app-icon" style="background:#107C41;">X</div><div class="app-name">Excel</div></div>
-        <div class="app-tile"><div class="app-icon" style="background:#B7472A;">P</div><div class="app-name">PowerPoint</div></div>
-        <div class="app-tile"><div class="app-icon" style="background:#0078D4;">O</div><div class="app-name">Outlook</div></div>
-        <div class="app-tile"><div class="app-icon" style="background:#5059C9;">T</div><div class="app-name">Teams</div></div>
-        <div class="app-tile"><div class="app-icon" style="background:#0364B8;">1</div><div class="app-name">OneDrive</div></div>
+        <div class="app-tile"><div class="app-icon" style="background:#D83B01;">W<img src="assets/icons/word.svg" alt="Word" onerror="this.remove()"></div><div class="app-name">Word</div></div>
+        <div class="app-tile"><div class="app-icon" style="background:#107C41;">X<img src="assets/icons/excel.svg" alt="Excel" onerror="this.remove()"></div><div class="app-name">Excel</div></div>
+        <div class="app-tile"><div class="app-icon" style="background:#B7472A;">P<img src="assets/icons/powerpoint.svg" alt="PowerPoint" onerror="this.remove()"></div><div class="app-name">PowerPoint</div></div>
+        <div class="app-tile"><div class="app-icon" style="background:#0078D4;">O<img src="assets/icons/outlook.svg" alt="Outlook" onerror="this.remove()"></div><div class="app-name">Outlook</div></div>
+        <div class="app-tile"><div class="app-icon" style="background:#5059C9;">T<img src="assets/icons/teams.svg" alt="Teams" onerror="this.remove()"></div><div class="app-name">Teams</div></div>
+        <div class="app-tile"><div class="app-icon" style="background:#0364B8;">1<img src="assets/icons/onedrive.svg" alt="OneDrive" onerror="this.remove()"></div><div class="app-name">OneDrive</div></div>
       </div>
     </div>
   </div>
@@ -654,7 +656,7 @@
         <a href="#contact">Contact</a>
       </div>
     </div>
-    <p class="footer-disclaimer">Microsoft, Windows, Office, Microsoft 365, Teams, Word, Excel, PowerPoint, Outlook et OneDrive sont des marques déposées de Microsoft Corporation. IT 360 SOLUTIONS est un partenaire revendeur agréé de licences Microsoft et n'est ni Microsoft Corporation ni l'une de ses filiales. Les offres présentées sont indicatives et font l'objet d'un devis personnalisé ; elles ne constituent pas une vente en ligne.</p>
+    <p class="footer-disclaimer">Microsoft, Windows, Office, Microsoft 365, Teams, Word, Excel, PowerPoint, Outlook et OneDrive sont des marques déposées de Microsoft Corporation. IT 360 SOLUTIONS est Cloud Solution Provider (CSP) Microsoft et utilise certains logos et éléments graphiques Microsoft avec autorisation, dans le cadre du programme partenaires Microsoft et conformément à ses règles d'usage de marque. IT 360 SOLUTIONS n'est ni Microsoft Corporation ni l'une de ses filiales. Les offres présentées sont indicatives et font l'objet d'un devis personnalisé ; elles ne constituent pas une vente en ligne.</p>
     <div class="footer-copy">© 2024–2026 IT 360 SOLUTIONS – Tous droits réservés.</div>
   </div>
 </footer>
